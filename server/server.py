@@ -57,7 +57,7 @@ config = {
     'det_save_dir': './demo_images/detection_result/',
     'rec_save_dir': './demo_images/recognition_result/',
     'crop_dir': './demo_images/crops/',
-    'lexicon_path': './crnn/data/icdar_generic_lexicon.txt',
+    'lexicon_path': '/opt/caffe/crnn/data/icdar_generic_lexicon.txt',
     'use_lexcion': True,
     'input_height': 768,
     'input_width': 768,
