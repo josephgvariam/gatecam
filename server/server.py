@@ -237,12 +237,12 @@ def process(filename):
         crop_image(os.path.join(config['img_dir'], config['image_name']), results, config['crop_dir'])
         import subprocess
         if config['use_lexcion']:
-            subprocess.check_call(['th', 'crnn/src/demo.lua', '-imgDir', config['img_dir'], \
+            subprocess.check_call(['th', '/opt/caffe/crnn/src/demo.lua', '-imgDir', config['img_dir'], \
                                    '-imgName', config['image_name'], '-cropDir', config['crop_dir'], '-resultDir',
                                    config['rec_save_dir'], \
                                    '-dicPath', config['lexicon_path']])
         else:
-            subprocess.check_call(['th', 'crnn/src/demo.lua', '-imgDir', config['img_dir'], \
+            subprocess.check_call(['th', '/opt/caffe/crnn/src/demo.lua', '-imgDir', config['img_dir'], \
                                    '-imgName', config['image_name'], '-cropDir', config['crop_dir'], '-resultDir',
                                    config['rec_save_dir'], \
                                    '-dicPath', config['lexicon_path']])
