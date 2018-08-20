@@ -170,8 +170,8 @@ def save_and_visu(image, results, config):
         det_fid.write(result_str)
         if config['visu_detection']:
             quad = np.array([[x1, y1], [x2, y2], [x3, y3], [x4, y4]])
-            color_quad = 'g'
-            currentAxis.add_patch(plt.Polygon(quad, fill=False, edgecolor=color_quad, linewidth=1))
+            color_quad = '#39ff14'
+            currentAxis.add_patch(plt.Polygon(quad, fill=False, edgecolor=color_quad, linewidth=0.7))
 
     det_fid.close()
     if config['visu_detection']:
