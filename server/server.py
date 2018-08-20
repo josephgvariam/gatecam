@@ -15,16 +15,17 @@ def scandirs():
 
 def copydebugimages():
     shutil.rmtree('/opt/caffe/examples/text/static/debug')
-    files = []
+    os.mkdir( '/opt/caffe/examples/text/static/debug' )
+    copied = []
 
     for root, dirs, files in os.walk('/opt/caffe/demo_images'):
         for currentFile in files:
             exts = ('.jpg')
             if currentFile.lower().endswith(exts):
-                shutil.copy(os.path.join(root, currentFile), '/opt/caffe/examples/text/static/debug')
-                files.append(os.path.join(root, currentFile))
+                shutil.copy(os.path.join(root, currentFile), '/opt/caffe/examples/text/static/debug/')
+                copied.append(currentFile)
 
-    return files
+    return copied
 
 @app.route('/')
 def hello_world():
@@ -32,8 +33,8 @@ def hello_world():
 
 @app.route('/debug')
 def debug():
-    print(copydebugimages())
-    return render_template('debug.html')
+    files = copydebugimages()
+    return render_template('debug.html', files=files)
 
 
 @app.route('/processimage', methods=["POST"])
