@@ -44,7 +44,7 @@ def processimage():
 
     process(now)
 
-    return send_file('./demo_images/' + now + '_rec_result.jpg', mimetype='image/jpeg')
+    return send_file('./demo_images/' + now + '_det_result.jpg', mimetype='image/jpeg')
 
 
 config = {
