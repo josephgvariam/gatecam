@@ -66,7 +66,7 @@ config = {
     'f_score_threshold': 0.7,
     'visu_detection': True,
     'visu_recognition': True,
-    'apply_recognition': True
+    'apply_recognition': False
 }
 
 
