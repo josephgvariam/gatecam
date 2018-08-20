@@ -40,11 +40,11 @@ def processimage():
 
     f = request.files['file']
 
-    f.save('demo_images/' + now + '.jpg')
+    f.save('/opt/caffe/demo_images/' + now + '.jpg')
 
     process(now)
 
-    return send_file('./demo_images/' + now + '_det_result.jpg', mimetype='image/jpeg')
+    return send_file('/opt/caffe/demo_images/' + now + '_det_result.jpg', mimetype='image/jpeg')
 
 
 config = {
@@ -57,16 +57,16 @@ config = {
     'det_save_dir': './demo_images/detection_result/',
     'rec_save_dir': './demo_images/recognition_result/',
     'crop_dir': './demo_images/crops/',
-    'lexicon_path': '/opt/caffe/crnn/data/icdar_generic_lexicon.txt',
-    'use_lexcion': True,
+    'lexicon_path': './crnn/data/icdar_generic_lexicon.txt',
+    'use_lexcion': False,
     'input_height': 768,
     'input_width': 768,
     'overlap_threshold': 0.2,
     'det_score_threshold': 0.1,
     'f_score_threshold': 0.7,
     'visu_detection': True,
-    'visu_recognition': False,
-    'apply_recognition': False
+    'visu_recognition': True,
+    'apply_recognition': True
 }
 
 
@@ -203,8 +203,8 @@ def visu_rec_results(image, rec_save_dir, f_score_threshold):
         print(f_score)
         if f_score > f_score_threshold:
             quad = np.array([[x1, y1], [x2, y2], [x3, y3], [x4, y4]])
-            color_quad = 'r'
-            currentAxis.add_patch(plt.Polygon(quad, fill=False, edgecolor=color_quad, linewidth=2))
+            color_quad = '#39ff14'
+            currentAxis.add_patch(plt.Polygon(quad, fill=False, edgecolor=color_quad, linewidth=0.7))
             currentAxis.text(x1, y1, rec_str, fontsize=5)
 
     rec_result_fid.close()
@@ -237,12 +237,12 @@ def process(filename):
         crop_image(os.path.join(config['img_dir'], config['image_name']), results, config['crop_dir'])
         import subprocess
         if config['use_lexcion']:
-            subprocess.check_call(['th', '/opt/caffe/crnn/src/demo.lua', '-imgDir', config['img_dir'], \
+            subprocess.check_call(['th', 'crnn/src/demo.lua', '-imgDir', config['img_dir'], \
                                    '-imgName', config['image_name'], '-cropDir', config['crop_dir'], '-resultDir',
                                    config['rec_save_dir'], \
                                    '-dicPath', config['lexicon_path']])
         else:
-            subprocess.check_call(['th', '/opt/caffe/crnn/src/demo.lua', '-imgDir', config['img_dir'], \
+            subprocess.check_call(['th', 'crnn/src/demo.lua', '-imgDir', config['img_dir'], \
                                    '-imgName', config['image_name'], '-cropDir', config['crop_dir'], '-resultDir',
                                    config['rec_save_dir'], \
                                    '-dicPath', config['lexicon_path']])
